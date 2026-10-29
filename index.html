@@ -19,6 +19,8 @@
   --line:#F1E7E7; --rose-50:#FFF5F7; --rose-100:#FFE4E9; --rose-200:#FECDD3;
   --rose-500:#F43F5E; --rose-600:#E11D48; --rose-700:#BE123C;
   --green:#10B981; --amber:#F59E0B; --soft:#F8FAFC;
+  /* 【功能】面板同邊框色（深色模式要一齊轉） */
+  --panel:#F8FAFC; --panel-2:#FFFFFF; --line2:#E5E7EB; --cellbg:rgba(248,250,252,.5);
 }
 /* 【功能】深色模式（跟系統，或手動切換）
    【原因】夜晚睇唔刺眼；用 CSS 變數統一改，唔需要逐個元素改
@@ -28,17 +30,20 @@
     --bg:#0F1115; --card:#161A20; --ink:#E8EAED; --ink-2:#B6BDC8; --ink-3:#7C8494;
     --line:#252B34; --rose-50:#241A1E; --rose-100:#2C1F24; --rose-200:#3A2A31;
     --soft:#1B2029;
+    --panel:#1B2029; --panel-2:#232A35; --line2:#2A3038; --cellbg:rgba(255,255,255,.045);
   }
 }
 [data-theme="dark"]{
   --bg:#0F1115; --card:#161A20; --ink:#E8EAED; --ink-2:#B6BDC8; --ink-3:#7C8494;
   --line:#252B34; --rose-50:#241A1E; --rose-100:#2C1F24; --rose-200:#3A2A31;
   --soft:#1B2029;
+  --panel:#1B2029; --panel-2:#232A35; --line2:#2A3038; --cellbg:rgba(255,255,255,.045);
 }
 [data-theme="light"]{
   --bg:#FAF7F5; --card:#FFFFFF; --ink:#1F2937; --ink-2:#4B5563; --ink-3:#9CA3AF;
   --line:#F1E7E7; --rose-50:#FFF5F7; --rose-100:#FFE4E9; --rose-200:#FECDD3;
   --soft:#F8FAFC;
+  --panel:#F8FAFC; --panel-2:#FFFFFF; --line2:#E5E7EB; --cellbg:rgba(248,250,252,.5);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0;height:100%}
@@ -73,29 +78,30 @@ header{display:flex; align-items:center; justify-content:space-between; padding:
 .iconbtn:hover{color:var(--ink-2); background:#f7f7f8}
 
 /* ---------- 設定抽屜 ---------- */
-.drawer{padding:10px 16px 14px; background:#F8FAFC; border-bottom:1px solid #EEF2F6;
+.drawer{padding:10px 16px 14px; background:var(--panel); border-bottom:1px solid var(--line2);
   display:none; flex-direction:column; gap:8px; font-size:12px; color:var(--ink-2)}
 .drawer.open{display:flex}
 .drawer .row{display:flex; align-items:center; justify-content:space-between}
 .drawer input[type=number]{width:64px; padding:5px 6px; text-align:center; font-weight:700;
-  border:1px solid #E5E7EB; border-radius:10px; background:#fff; color:var(--ink)}
+  border:1px solid var(--line2); border-radius:10px; background:var(--panel-2); color:var(--ink)}
 .drawer .hint{font-size:11px; color:var(--ink-3)}
 .drawer .acts{display:flex; gap:8px; flex-wrap:wrap; padding-top:4px}
-.sbtn{padding:7px 10px; border-radius:10px; background:#fff; border:1px solid #E5E7EB;
+.sbtn{padding:7px 10px; border-radius:10px; background:var(--panel-2); border:1px solid var(--line2);
   font-size:11.5px; font-weight:700; color:var(--ink-2)}
 .sbtn.danger{color:#B91C1C; border-color:#FECACA; background:#FEF2F2}
 
 /* ---------- 圖例 ---------- */
-.legend{display:flex; align-items:center; justify-content:space-around; padding:7px 10px;
-  background:rgba(255,245,247,.6); border-bottom:1px solid var(--line);
-  font-size:11px; color:var(--ink-2)}
+.legend{display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+  gap:5px 12px; padding:7px 10px;
+  background:var(--rose-50); border-bottom:1px solid var(--line);
+  font-size:10.5px; color:var(--ink-2)}
 .legend span.item{display:flex; align-items:center; gap:4px}
 .legend .pred{opacity:.35}
 
 /* ---------- 月份切換 ---------- */
 .monthbar{display:flex; align-items:center; justify-content:space-between; padding:12px 16px}
 .nav{display:flex; align-items:center; gap:10px}
-.navbtn{width:32px; height:32px; border-radius:999px; background:#F8FAFC; color:var(--ink-2);
+.navbtn{width:32px; height:32px; border-radius:999px; background:var(--panel); color:var(--ink-2);
   display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:700}
 .navbtn:active{transform:scale(.94)}
 .mlabel{font-weight:700; font-size:15px; min-width:112px; text-align:center}
@@ -105,22 +111,30 @@ header{display:flex; align-items:center; justify-content:space-between; padding:
 /* ---------- 星期 ---------- */
 .weekhead{display:grid; grid-template-columns:repeat(7,1fr); text-align:center;
   font-size:11px; font-weight:700; color:var(--ink-3); padding:4px 0 6px;
-  border-bottom:1px solid #FAFAFB}
+  border-bottom:1px solid var(--line)}
 .weekhead .we{color:var(--rose-500)}
 
 /* ---------- 日曆格 ---------- */
 .grid{display:grid; grid-template-columns:repeat(7,1fr); gap:4px; padding:8px}
-.cell{min-height:58px; border-radius:14px; border:1px solid transparent; background:rgba(248,250,252,.5);
+.cell{min-height:58px; border-radius:14px; border:1px solid transparent; background:var(--cellbg);
   display:flex; flex-direction:column; align-items:center; justify-content:space-between;
   padding:5px 2px 3px; transition:background .15s, border-color .15s}
 .cell.empty{background:transparent; border:none}
-.cell.haslog{background:#fff; border-color:var(--line); box-shadow:0 1px 2px rgba(31,41,55,.05)}
+.cell.haslog{background:var(--card); border-color:var(--line); box-shadow:0 1px 2px rgba(31,41,55,.05)}
 .cell.today{box-shadow:0 0 0 2px var(--rose-500); background:rgba(255,245,247,.5)}
-.cell:hover{border-color:#E5E7EB}
+.cell:hover{border-color:var(--line2)}
 /* 【功能】多日選取時嘅高亮
    【原因】用戶要睇清楚掃咗邊幾日
    【修改指引】唔需要改 */
 .cell.sel{background:var(--rose-100); border-color:var(--rose-200)}
+/* 【功能】易孕期（藍框）／相對低機會（綠框）／排卵日（圓點）
+   【原因】用 outline 而唔用 box-shadow，避免同「今日」個框衝突
+   【修改指引】改顏色改呢兩行 */
+.cell.fertile{outline:2px solid #3B82F6; outline-offset:-2px; background:rgba(59,130,246,.07)}
+.cell.safe{outline:2px dashed #10B981; outline-offset:-2px; background:rgba(16,185,129,.06)}
+.ovu{position:absolute; top:5px; right:5px; width:6px; height:6px; border-radius:50%;
+  background:#7C3AED; box-shadow:0 0 0 1.5px var(--card)}
+.cell{position:relative}
 .dnum{font-size:12px; font-weight:700; color:var(--ink)}
 .cell.today .dnum{color:var(--rose-600)}
 .drop{font-size:15px; line-height:1}
@@ -128,7 +142,7 @@ header{display:flex; align-items:center; justify-content:space-between; padding:
 .badges{display:flex; gap:1px; height:12px; font-size:10px; align-items:center}
 
 /* ---------- 底部預測 ---------- */
-footer{padding:12px 16px 16px; border-top:1px solid var(--line); background:rgba(248,250,252,.6);
+footer{padding:12px 16px 16px; border-top:1px solid var(--line); background:var(--panel);
   text-align:center; margin-top:auto}
 #predText{font-size:12px; color:var(--ink-2); line-height:1.65; margin:0}
 #predText b{color:var(--rose-600)}
@@ -141,7 +155,7 @@ footer{padding:12px 16px 16px; border-top:1px solid var(--line); background:rgba
   z-index:40; display:flex; align-items:flex-end; justify-content:center; padding:0}
 @media (min-width:640px){ .overlay{align-items:center} }
 .overlay[hidden]{display:none}
-.sheet{width:100%; max-width:430px; background:#fff; border-radius:22px 22px 0 0;
+.sheet{width:100%; max-width:430px; background:var(--card); border-radius:22px 22px 0 0;
   padding:18px 18px 20px; max-height:88vh; overflow-y:auto;
   animation:up .18s ease-out}
 @media (min-width:640px){ .sheet{border-radius:22px} }
@@ -150,13 +164,13 @@ footer{padding:12px 16px 16px; border-top:1px solid var(--line); background:rgba
   border-bottom:1px solid var(--line); padding-bottom:10px; margin-bottom:12px}
 .sheethead h2{margin:0; font-size:15px; font-weight:700}
 .sheethead .sub{margin:2px 0 0; font-size:11px; color:var(--ink-3)}
-.xbtn{width:30px; height:30px; border-radius:999px; background:#F3F4F6; color:var(--ink-3);
+.xbtn{width:30px; height:30px; border-radius:999px; background:var(--panel); color:var(--ink-3);
   display:flex; align-items:center; justify-content:center}
 .label{font-size:11px; font-weight:700; color:var(--ink-3); letter-spacing:.4px; margin:10px 0 6px}
 
 /* 勾選行 */
 .checkrow{display:flex; align-items:center; justify-content:space-between; padding:11px 13px;
-  border:1px solid #E5E7EB; border-radius:15px; background:rgba(248,250,252,.6); margin-bottom:7px}
+  border:1px solid var(--line2); border-radius:15px; background:var(--panel); margin-bottom:7px}
 .checkrow .left{display:flex; align-items:center; gap:9px; font-weight:700; font-size:13px}
 .checkrow input[type=checkbox]{width:19px; height:19px; accent-color:var(--rose-500)}
 .checkrow.on{border-color:var(--rose-500); background:var(--rose-50)}
@@ -172,17 +186,17 @@ footer{padding:12px 16px 16px; border-top:1px solid var(--line); background:rgba
 .flow{display:none; margin:0 0 8px 12px; padding:8px 0 4px 12px; border-left:2px solid var(--rose-200)}
 .flow.show{display:block}
 .flow .row{display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-top:6px}
-.fbtn{padding:8px 4px; border-radius:11px; border:1px solid #E5E7EB; background:#fff;
+.fbtn{padding:8px 4px; border-radius:11px; border:1px solid var(--line2); background:var(--panel-2);
   font-size:12px; font-weight:700; color:var(--ink-2)}
 .fbtn[aria-pressed="true"]{border-color:var(--rose-500); background:var(--rose-50); color:var(--rose-600)}
 
-textarea{width:100%; padding:11px; border:1px solid #E5E7EB; border-radius:14px;
-  font:inherit; font-size:12.5px; color:var(--ink); background:rgba(248,250,252,.5);
+textarea{width:100%; padding:11px; border:1px solid var(--line2); border-radius:14px;
+  font:inherit; font-size:12.5px; color:var(--ink); background:var(--panel);
   resize:vertical; outline:none}
 textarea:focus{border-color:var(--rose-500)}
 .acts{display:flex; gap:9px; margin-top:14px}
 .btn{padding:12px 16px; border-radius:15px; font-weight:700; font-size:13px; border:none}
-.btn.del{background:#F3F4F6; color:var(--ink-2)}
+.btn.del{background:var(--panel); color:var(--ink-2)}
 .btn.primary{flex:1; background:var(--rose-500); color:#fff; box-shadow:0 6px 14px rgba(244,63,94,.25)}
 .btn.primary:active{transform:scale(.99)}
 .btn.ghost{background:var(--rose-50); color:var(--rose-600)}
@@ -199,11 +213,11 @@ textarea:focus{border-color:var(--rose-500)}
 .rowbtns{display:flex; gap:8px; margin-top:8px}
 .rowbtns .btn{flex:1}
 .pin{display:flex; gap:8px; align-items:center; margin-top:8px}
-.pin input{width:96px; padding:9px 10px; border:1px solid #E5E7EB; border-radius:12px;
+.pin input{width:96px; padding:9px 10px; border:1px solid var(--line2); border-radius:12px;
   text-align:center; font-weight:700; letter-spacing:3px}
 
 /* Toast */
-#toast{position:fixed; left:50%; bottom:70px; transform:translateX(-50%);
+#toast{position:fixed; left:50%; top:64px; transform:translateX(-50%);
   background:rgba(31,41,55,.92); color:#fff; font-size:12px; padding:9px 16px;
   border-radius:999px; z-index:60; pointer-events:none; transition:opacity .25s; opacity:1}
 #toast[hidden]{display:none}
@@ -216,25 +230,34 @@ textarea:focus{border-color:var(--rose-500)}
        【原因】CEO 規格：Top bar 要有月份、同步 🔗、設定 ⚙️
        【修改指引】唔需要改 -->
   <header>
-    <div class="brand"><span>🌸</span><span>經期日誌</span></div>
+    <div class="brand"><span>🌸</span><span data-i18n="app.brand">經期日誌</span></div>
     <div class="hbtns">
-      <button class="pill" id="syncBtn" type="button">🔗 雙人同步</button>
-      <button class="iconbtn" id="settingsBtn" type="button" aria-label="設定">⚙️</button>
+      <button class="pill" id="syncBtn" type="button" data-i18n="header.sync">🔗 雙人同步</button>
+      <!-- 【功能】主題切換（跟系統 → 深色 → 淺色）
+           【原因】CEO 要求俾用戶自己揀
+           【修改指引】唔需要改 -->
+      <button class="iconbtn" id="themeIcon" type="button" data-i18n-title="header.theme" aria-label="切換主題">🌓</button>
+      <button class="iconbtn" id="settingsBtn" type="button" data-i18n-title="header.settings" aria-label="設定">⚙️</button>
     </div>
   </header>
 
   <div class="drawer" id="drawer">
-    <div class="row"><span>預設週期（日）</span><input type="number" id="setCycle" min="15" max="90" value="28"></div>
-    <div class="row"><span>預設經期長度（日）</span><input type="number" id="setPeriod" min="1" max="15" value="5"></div>
-    <p class="hint" id="setInfo">紀錄足夠時會自動改用歷史平均。</p>
-    <div class="row"><span>備份 PIN（可留空）</span><input type="password" id="backupPin" maxlength="4" placeholder="••••"
+    <div class="row"><span data-i18n="drawer.lang">語言</span>
+      <select id="langSel" style="padding:5px 8px;border:1px solid var(--line2);border-radius:10px;
+        background:var(--panel-2);color:var(--ink);font-size:12px"></select></div>
+    <div class="row"><span data-i18n="drawer.cycle">預設週期（日）</span><input type="number" id="setCycle" min="15" max="90" value="28"></div>
+    <div class="row"><span data-i18n="drawer.periodLen">預設經期長度（日）</span><input type="number" id="setPeriod" min="1" max="15" value="5"></div>
+    <p class="hint" id="setInfo"></p>
+    <div class="row"><span data-i18n="drawer.showFert">顯示易孕期／排卵日</span><input type="checkbox" id="setFertility" checked
+      style="width:18px;height:18px;accent-color:var(--rose-500)"></div>
+    <div class="row"><span data-i18n="drawer.backupPin">備份 PIN（可留空）</span><input type="password" id="backupPin" maxlength="4" placeholder="••••"
       style="width:80px;letter-spacing:3px;text-align:center"></div>
     <div class="acts">
-      <button class="sbtn" id="saveSettings" type="button">儲存設定</button>
+      <button class="sbtn" id="saveSettings" type="button" data-i18n="drawer.save">儲存設定</button>
       <button class="sbtn" id="themeBtn" type="button">主題：跟系統</button>
-      <button class="sbtn" id="exportBtn" type="button">匯出備份</button>
-      <button class="sbtn" id="importBtn" type="button">匯入備份</button>
-      <button class="sbtn danger" id="clearAllBtn" type="button">清除本機紀錄</button>
+      <button class="sbtn" id="exportBtn" type="button" data-i18n="drawer.export">匯出備份</button>
+      <button class="sbtn" id="importBtn" type="button" data-i18n="drawer.import">匯入備份</button>
+      <button class="sbtn danger" id="clearAllBtn" type="button" data-i18n="drawer.clear">清除本機紀錄</button>
     </div>
     <input type="file" id="importFile" accept=".json,application/json" hidden>
   </div>
@@ -243,11 +266,14 @@ textarea:focus{border-color:var(--rose-500)}
        【原因】用戶要知每個小標記代表咩
        【修改指引】唔需要改 -->
   <div class="legend">
-    <span class="item">🩸 月經</span>
-    <span class="item pred">🩸 預測</span>
-    <span class="item">🛡️ 安全</span>
-    <span class="item">⚠️ 不安全</span>
-    <span class="item">💬 備註</span>
+    <span class="item" data-i18n="legend.period">🩸 月經</span>
+    <span class="item pred" data-i18n="legend.predicted">🩸 預測</span>
+    <span class="item" data-i18n="legend.safe">🛡️ 安全</span>
+    <span class="item" data-i18n="legend.unsafe">⚠️ 不安全</span>
+    <span class="item" data-i18n="legend.note">💬 備註</span>
+    <span class="item"><i style="display:inline-block;width:11px;height:11px;border:2px solid #3B82F6;border-radius:3px"></i> <span data-i18n="legend.fertile">易孕</span></span>
+    <span class="item"><i style="display:inline-block;width:11px;height:11px;border:2px dashed #10B981;border-radius:3px"></i> <span data-i18n="legend.lowChance">低機會</span></span>
+    <span class="item"><i style="display:inline-block;width:6px;height:6px;background:#7C3AED;border-radius:50%"></i> <span data-i18n="legend.ovulation">排卵</span></span>
   </div>
 
   <div class="monthbar">
@@ -256,10 +282,10 @@ textarea:focus{border-color:var(--rose-500)}
       <div class="mlabel" id="monthLabel">—</div>
       <button class="navbtn" id="nextBtn" type="button" aria-label="下個月">›</button>
     </div>
-    <button class="todaybtn" id="todayBtn" type="button">今天</button>
+    <button class="todaybtn" id="todayBtn" type="button" data-i18n="month.today">今天</button>
   </div>
 
-  <div class="weekhead">
+  <div class="weekhead" id="weekhead">
     <div class="we">日</div><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div class="we">六</div>
   </div>
 
@@ -270,7 +296,8 @@ textarea:focus{border-color:var(--rose-500)}
     <!-- 【功能】資料存放聲明
          【原因】CEO 要求喺底部講清楚紀錄存喺邊、要備份就匯出
          【修改指引】唔需要改 -->
-    <p id="storageNote">🔒 紀錄只存喺<b>你呢部機嘅瀏覽器</b>（唔會上傳）。換裝置、清除瀏覽器資料或者重裝都會冇咗，記得定期用 ⚙️ →「匯出備份」。</p>
+    <p id="fertilityNote" data-i18n-html="footer.fertNote" hidden style="margin:8px 0 0;font-size:10.5px;color:var(--ink-3);line-height:1.7"></p>
+    <p id="storageNote" data-i18n-html="footer.storage"></p>
   </footer>
 </div>
 
@@ -282,41 +309,41 @@ textarea:focus{border-color:var(--rose-500)}
     <div class="sheethead">
       <div>
         <h2 id="dayTitle">—</h2>
-        <p class="sub" id="modalSub">勾選或寫備註，撳「儲存」</p>
+        <p class="sub" id="modalSub" data-i18n="modal.sub">勾選或寫備註，撳「儲存」</p>
       </div>
       <button class="xbtn" id="cancelDay" type="button" aria-label="關閉">✕</button>
     </div>
 
-    <div class="label">標記</div>
+    <div class="label" data-i18n="label.marks">標記</div>
     <label class="checkrow" id="rowPeriod">
-      <span class="left"><span>🩸</span><span>月經</span></span>
+      <span class="left"><span>🩸</span><span data-i18n="mark.period">月經</span></span>
       <input type="checkbox" id="cbPeriod">
     </label>
 
     <div class="flow" id="flowRow">
-      <div class="label" style="margin-top:0">流量</div>
+      <div class="label" data-i18n="label.flow" style="margin-top:0">流量</div>
       <div class="row">
-        <button class="fbtn" type="button" data-flow="heavy" aria-pressed="false">多</button>
-        <button class="fbtn" type="button" data-flow="normal" aria-pressed="true">正常</button>
-        <button class="fbtn" type="button" data-flow="light" aria-pressed="false">小</button>
+        <button class="fbtn" type="button" data-flow="heavy" aria-pressed="false" data-i18n="flow.heavy">多</button>
+        <button class="fbtn" type="button" data-flow="normal" aria-pressed="true" data-i18n="flow.normal">正常</button>
+        <button class="fbtn" type="button" data-flow="light" aria-pressed="false" data-i18n="flow.light">小</button>
       </div>
     </div>
 
     <label class="checkrow" id="rowSafe">
-      <span class="left"><span>🛡️</span><span>安全性行為</span></span>
+      <span class="left"><span>🛡️</span><span data-i18n="mark.safeSex">安全性行為</span></span>
       <input type="checkbox" id="cbSafe">
     </label>
     <label class="checkrow" id="rowUnsafe">
-      <span class="left"><span>⚠️</span><span>不安全性行為</span></span>
+      <span class="left"><span>⚠️</span><span data-i18n="mark.unsafeSex">不安全性行為</span></span>
       <input type="checkbox" id="cbUnsafe">
     </label>
 
-    <div class="label" id="remarkLabel">備註</div>
-    <textarea id="remark" rows="2" placeholder="症狀、心情或者其他記事…"></textarea>
+    <div class="label" id="remarkLabel" data-i18n="label.note">備註</div>
+    <textarea id="remark" rows="2" data-i18n-ph="note.ph" placeholder="症狀、心情或者其他記事…"></textarea>
 
     <div class="acts">
-      <button class="btn del" id="clearDay" type="button">刪除</button>
-      <button class="btn primary" id="saveDay" type="button">儲存</button>
+      <button class="btn del" id="clearDay" type="button" data-i18n="btn.del">刪除</button>
+      <button class="btn primary" id="saveDay" type="button" data-i18n="btn.save">儲存</button>
     </div>
   </div>
 </div>
@@ -328,60 +355,50 @@ textarea:focus{border-color:var(--rose-500)}
   <div class="sheet">
     <div class="sheethead">
       <div>
-        <h2>🔗 雙人離線同步</h2>
-        <p class="sub">點對點傳資料，唔經任何伺服器</p>
+        <h2 data-i18n="sync.title">🔗 雙人離線同步</h2>
+        <p class="sub" data-i18n="sync.sub">點對點傳資料，唔經任何伺服器</p>
       </div>
       <button class="xbtn" id="closeSync" type="button" aria-label="關閉">✕</button>
     </div>
 
     <div class="tabs">
-      <button class="tab on" id="tabGen" type="button">① 產生同步碼</button>
-      <button class="tab" id="tabMerge" type="button">② 合併對方資料</button>
+      <button class="tab on" id="tabGen" type="button" data-i18n="sync.tabGen">① 產生同步碼</button>
+      <button class="tab" id="tabMerge" type="button" data-i18n="sync.tabMerge">② 合併對方資料</button>
     </div>
 
     <div id="paneGen">
-      <p class="hint" style="font-size:12px;color:var(--ink-2);margin:0 0 4px">
-        <b>方法一（日常）</b>：產生同步碼 → 複製或分享 → 對方喺<b>自己個 App 嘅「合併」貼上</b>。<br>
-        可以設 4 位 PIN 加密（對方要輸入同一個 PIN）。
-      </p>
+      <p class="hint" data-i18n-html="sync.genHint" style="font-size:12px;color:var(--ink-2);margin:0 0 4px"></p>
       <div class="pin">
-        <span style="font-size:12px">PIN（可留空）</span>
+        <span style="font-size:12px" data-i18n="sync.pinOptional">PIN（可留空）</span>
         <input type="password" id="genPin" inputmode="numeric" maxlength="4" placeholder="••••">
       </div>
       <div class="rowbtns">
-        <button class="btn ghost" id="genSync" type="button">產生同步碼</button>
+        <button class="btn ghost" id="genSync" type="button" data-i18n="sync.gen">產生同步碼</button>
       </div>
       <div class="codewrap" id="syncOutWrap" hidden>
         <textarea id="syncOut" rows="4" readonly></textarea>
         <div class="rowbtns">
-          <button class="btn ghost" id="copySync" type="button">複製碼</button>
-          <button class="btn ghost" id="copyLink" type="button">複製連結</button>
-          <button class="btn ghost" id="shareSync" type="button">分享</button>
+          <button class="btn ghost" id="copySync" type="button" data-i18n="sync.copy">複製碼</button>
+          <button class="btn ghost" id="copyLink" type="button" data-i18n="sync.copyLink">複製連結</button>
+          <button class="btn ghost" id="shareSync" type="button" data-i18n="sync.share">分享</button>
         </div>
         <p class="hint" style="font-size:11px;color:var(--ink-3);margin:8px 0 0;border-top:1px dashed var(--line);padding-top:8px">
-          <b>方法二（大量紀錄／換機／備份）</b>：用「加密備份檔」經 AirDrop／檔案 App 傳過去，
-          對方喺 ⚙️ →「匯入備份」載入。
-          <button class="sbtn" id="openBackup" type="button" style="margin-top:6px">去備份／匯入</button>
+          <span data-i18n-html="sync.method2"></span>
+          <button class="sbtn" id="openBackup" type="button" data-i18n="sync.goBackup" style="margin-top:6px">去備份／匯入</button>
         </p>
-        <p class="hint" id="linkHint" hidden style="font-size:11px;color:var(--ink-3);margin:6px 0 0">
-          連結只會喺<b>同一個瀏覽器</b>開返同一個網址時，資料才會落返去你平時用嘅嗰份。
-          如果彈去另一個瀏覽器／App 內建瀏覽器，就要改用「複製碼 → 貼上」。
-        </p>
+        <p class="hint" id="linkHint" data-i18n-html="sync.linkHint" hidden style="font-size:11px;color:var(--ink-3);margin:6px 0 0"></p>
       </div>
     </div>
 
     <div id="paneMerge" hidden>
-      <p class="hint" style="font-size:12px;color:var(--ink-2);margin:0 0 6px">
-        貼上對方嘅<b>同步碼</b>（整條連結都貼得，會自動拆出嚟）。<br>
-        ⚠️ 一定要喺<b>你自己平時開呢個 App 嘅同一個瀏覽器</b>貼，先會合併到你嗰份紀錄。
-      </p>
+      <p class="hint" data-i18n-html="sync.mergeHint" style="font-size:12px;color:var(--ink-2);margin:0 0 6px"></p>
       <textarea id="mergeIn" rows="4" placeholder="貼上同步碼…"></textarea>
       <div class="pin">
-        <span style="font-size:12px">PIN（如有加密）</span>
+        <span style="font-size:12px" data-i18n="sync.pinRequired">PIN（如有加密）</span>
         <input type="password" id="mergePin" inputmode="numeric" maxlength="4" placeholder="••••">
       </div>
       <div class="rowbtns">
-        <button class="btn primary" id="mergeSync" type="button">合併</button>
+        <button class="btn primary" id="mergeSync" type="button" data-i18n="sync.merge">合併</button>
       </div>
     </div>
 
@@ -503,6 +520,16 @@ function loadData() {
   // 【原因】舊資料可能冇呢兩個欄位，要補返
   if (!data.settings.cycleGap) data.settings.cycleGap = DEFAULT_SETTINGS.cycleGap;
   if (!data.settings.periodLength) data.settings.periodLength = DEFAULT_SETTINGS.periodLength;
+
+  // 【功能】第一次開：跟瀏覽器語言
+  // 【原因】英文用家唔想一開就係中文；中文（台灣／繁體）用家就用書面語
+  // 【修改指引】唔需要改
+  if (!data.settings.lang) {
+    var nav = String(navigator.language || 'zh-TW');
+    // 【原因】只有兩種語言：英文瀏覽器用 en，其餘一律繁體中文（書面語）
+    if (/^en/i.test(nav)) data.settings.lang = 'en';
+    else data.settings.lang = 'zh-TW';
+  }
   return data;
 }
 
@@ -553,6 +580,368 @@ function esc(s) {
   return String(s == null ? '' : s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+
+/* ===== js/05-i18n.js ===== */
+/* ==========================================================================
+   05-i18n.js — 兩種語言：繁體中文（zh-TW，預設）／英文（en）
+   【功能】所有介面文字集中喺呢度，唔會散落喺 HTML 同其他 JS
+   【原因】CEO 要求可以揀英文或者繁體書面語版本
+   【修改指引】加新語言：複製一個 dict 區塊，加入 LOCALES，再喺 template 用 data-i18n
+   ========================================================================== */
+
+var I18N = {
+  /* ---------------- 繁體中文（書面語）— 預設 ---------------- */
+  'zh-TW': {
+    'html.lang': 'zh-TW',
+    'app.brand': '經期日誌',
+    'app.title': '經期日誌 — 離線雙人同步',
+    'header.sync': '🔗 雙人同步',
+    'header.theme': '切換主題',
+    'header.settings': '設定',
+    'legend.period': '🩸 月經',
+    'legend.predicted': '🩸 預測',
+    'legend.safe': '🛡️ 安全',
+    'legend.unsafe': '⚠️ 不安全',
+    'legend.note': '💬 備註',
+    'legend.fertile': '易孕',
+    'legend.lowChance': '低機率',
+    'legend.ovulation': '排卵',
+    'month.today': '今天',
+    'drawer.cycle': '預設週期（天）',
+    'drawer.periodLen': '預設經期長度（天）',
+    'drawer.showFert': '顯示易孕期／排卵日',
+    'drawer.backupPin': '備份 PIN（可留空）',
+    'drawer.save': '儲存設定',
+    'drawer.theme': '主題：跟隨系統',
+    'drawer.lang': '語言',
+    'drawer.export': '匯出備份',
+    'drawer.import': '匯入備份',
+    'drawer.clear': '清除本機紀錄',
+    'drawer.hintHistory': '用 {n} 個週期・平均 {g} 日；下面數值只喺資料不足時用',
+    'drawer.hintDefault': '資料未夠 2 個週期，用下面數值',
+    'footer.noRecords': '點日期開始記錄',
+    'footer.today': '預計<b>今日</b>開始 🩸',
+    'footer.nextIn': '下次約 <b>{d} 日後</b>（{date}）',
+    'footer.srcHistory': '按 {n} 個週期・平均 {g} 日・經期 {p} 日',
+    'footer.srcDefault': '資料未夠，用預設 {g} 日',
+    'footer.fertNote': '⚠️ 易孕期／安全期只係估算，<b>唔可以當避孕</b>',
+    'footer.storage': '🔒 只存喺本機瀏覽器・換機或清資料會冇・定期 ⚙️ 匯出備份',
+    'modal.sub': '勾選後按「儲存」',
+    'modal.subRange': '套用月經／流量到 {n} 日',
+    'label.marks': '標記',
+    'mark.period': '月經',
+    'mark.safeSex': '安全性行為',
+    'mark.unsafeSex': '不安全性行為',
+    'label.flow': '流量',
+    'flow.heavy': '多',
+    'flow.normal': '正常',
+    'flow.light': '少',
+    'label.note': '備註',
+    'note.ph': '症狀、心情或其他記事…',
+    'btn.del': '刪除',
+    'btn.save': '儲存',
+    'sync.title': '🔗 雙人離線同步',
+    'sync.sub': '點對點・不經伺服器',
+    'sync.tabGen': '① 產生同步碼',
+    'sync.tabMerge': '② 合併對方資料',
+    'sync.genHint': '① 產生碼 → 傳給對方 → 對方喺<b>自己 App「合併」貼上</b>（可設 4 位 PIN）',
+    'sync.pinOptional': 'PIN（可留空）',
+    'sync.gen': '產生同步碼',
+    'sync.copy': '複製碼',
+    'sync.copyLink': '複製連結',
+    'sync.share': '分享',
+    'sync.linkHint': '連結只喺<b>同一瀏覽器</b>先會寫返你嗰份；跳到其他瀏覽器就用「複製碼」。',
+    'sync.method2': '② 或者用加密備份檔（AirDrop／檔案）→ 對方 ⚙️ 匯入',
+    'sync.goBackup': '前往備份／匯入',
+    'sync.mergeHint': '貼上對方嘅碼（整條連結都得）。<br>⚠️ 要喺<b>你平時開呢個 App 嘅同一瀏覽器</b>貼。',
+    'sync.pinRequired': 'PIN（如有加密）',
+    'sync.merge': '合併',
+    'day.weekdays': '星期日,星期一,星期二,星期三,星期四,星期五,星期六',
+    'week.short': '日,一,二,三,四,五,六',
+    'day.weekshort': '週日,週一,週二,週三,週四,週五,週六',
+    'day.modalTitle': '{m}/{d} {week}',
+    'day.rangeTitle': '{m1}/{d1}–{m2}/{d2}（{n} 日）',
+    'month.label': '{y} 年 {m} 月',
+    'toast.saved': '已儲存',
+    'toast.cleared': '已清除',
+    'toast.deleted': '已刪除',
+    'toast.marked': '已標記 {n} 天',
+    'toast.settingsSaved': '設定已儲存',
+    'toast.themeAuto': '跟隨系統',
+    'toast.themeDark': '已切換為深色',
+    'toast.themeLight': '已切換為淺色',
+    'toast.langChanged': '語言已切換',
+    'toast.exported': '已匯出備份（未加密）',
+    'toast.exportedEnc': '已匯出加密備份',
+    'toast.imported': '已匯入：新增 {a}、更新 {u} 天',
+    'toast.clearedAll': '已清除本機紀錄',
+    'toast.cycleRange': '週期請輸入 15–90 天',
+    'toast.periodRange': '經期長度請輸入 1–15 天',
+    'toast.pin4': 'PIN 需為 4 位數字',
+    'toast.needPin': '加密備份需先輸入 PIN 才能匯入',
+    'toast.needCode': '請先產生同步碼',
+    'toast.copied': '已複製，貼到訊息即可傳給對方',
+    'toast.selected': '已選取，請按 Ctrl／⌘ + C 複製',
+    'toast.shareUnsupported': '此瀏覽器不支援分享，已為你複製',
+    'toast.shared': '已開啟分享',
+    'toast.shareCancelled': '已取消分享',
+    'toast.localNoLink': '目前以本機檔案開啟，沒有網址可分享；請使用「複製碼」或「分享」',
+    'toast.linkCopied': '已複製連結（{n} 字元），對方點開即可',
+    'toast.linkCopiedPaste': '已複製連結。提醒對方：請貼到自己的 App，不要直接點開。',
+    'toast.copyFailed': '複製失敗',
+    'sync.msgGenerating': '產生中…',
+    'sync.msgGenerated': '已產生（{d} 天紀錄、{n} 字元）{enc}',
+    'sync.msgEncrypted': '，已加密',
+    'sync.msgPlain': '，未加密',
+    'sync.msgGenFailed': '產生失敗：{e}',
+    'sync.msgDecoding': '解碼中…',
+    'sync.msgMerged': '已合併：新增 {a} 天、更新 {u} 天、保留本機 {k} 天。預測已重新計算。',
+    'sync.msgMergeFailed': '合併失敗：{e}',
+    'sync.msgNeedPin': '此同步碼已加密，請輸入對方的 4 位 PIN',
+    'sync.msgNeedCode': '請貼上同步碼',
+    'sync.msgFromUrl': '已從網址讀取同步碼，如有 PIN 請輸入，再按「合併」',
+    'confirm.clear1': '將清除本機 {n} 天紀錄（無法復原）。建議先「匯出備份」。\n確定清除？',
+    'confirm.clear2': '最後確認：清除後無法還原，繼續？'
+  },
+
+  /* ---------------- English ---------------- */
+  'en': {
+    'html.lang': 'en',
+    'app.brand': 'Period Tracker',
+    'app.title': 'Period Tracker — Offline & Partner Sync',
+    'header.sync': '🔗 Partner sync',
+    'header.theme': 'Toggle theme',
+    'header.settings': 'Settings',
+    'legend.period': '🩸 Period',
+    'legend.predicted': '🩸 Predicted',
+    'legend.safe': '🛡️ Protected',
+    'legend.unsafe': '⚠️ Unprotected',
+    'legend.note': '💬 Note',
+    'legend.fertile': 'Fertile',
+    'legend.lowChance': 'Low chance',
+    'legend.ovulation': 'Ovulation',
+    'month.today': 'Today',
+    'drawer.cycle': 'Default cycle (days)',
+    'drawer.periodLen': 'Default period length (days)',
+    'drawer.showFert': 'Show fertile window / ovulation',
+    'drawer.backupPin': 'Backup PIN (optional)',
+    'drawer.save': 'Save settings',
+    'drawer.theme': 'Theme: system',
+    'drawer.lang': 'Language',
+    'drawer.export': 'Export backup',
+    'drawer.import': 'Import backup',
+    'drawer.clear': 'Clear local data',
+    'drawer.hintHistory': '{n} cycles · avg {g}d · values below are fallback',
+    'drawer.hintDefault': 'Under 2 cycles · using values below',
+    'footer.noRecords': 'Tap a date to start logging',
+    'footer.today': 'Predicted start: <b>today</b> 🩸',
+    'footer.nextIn': 'Next in <b>{d}d</b> ({date})',
+    'footer.srcHistory': '{n} cycles · avg {g}d · period {p}d',
+    'footer.srcDefault': 'Not enough data · default {g}d',
+    'footer.fertNote': '⚠️ Fertile/safe frames are estimates — <b>not contraception</b>',
+    'footer.storage': '🔒 Stored in this browser only · lost if cleared · export from ⚙️',
+    'modal.sub': 'Tick, then Save',
+    'modal.subRange': 'Apply period/flow to {n} days',
+    'label.marks': 'Marks',
+    'mark.period': 'Period',
+    'mark.safeSex': 'Protected sex',
+    'mark.unsafeSex': 'Unprotected sex',
+    'label.flow': 'Flow',
+    'flow.heavy': 'Heavy',
+    'flow.normal': 'Normal',
+    'flow.light': 'Light',
+    'label.note': 'Note',
+    'note.ph': 'Symptoms, mood or anything else…',
+    'btn.del': 'Delete',
+    'btn.save': 'Save',
+    'sync.title': '🔗 Offline partner sync',
+    'sync.sub': 'Peer-to-peer · no server',
+    'sync.tabGen': '① Create sync code',
+    'sync.tabMerge': '② Merge partner data',
+    'sync.genHint': '① Create code → send → partner pastes into <b>their app → Merge</b> (optional 4-digit PIN)',
+    'sync.pinOptional': 'PIN (optional)',
+    'sync.gen': 'Create sync code',
+    'sync.copy': 'Copy code',
+    'sync.copyLink': 'Copy link',
+    'sync.share': 'Share',
+    'sync.linkHint': 'A link only works in the <b>same browser</b>. Otherwise use “Copy code”.',
+    'sync.method2': '② Or send an encrypted backup file → partner imports it via ⚙️',
+    'sync.goBackup': 'Go to backup',
+    'sync.mergeHint': 'Paste their code (a full link works).<br>⚠️ Use <b>the same browser</b> you normally open this app in.',
+    'sync.pinRequired': 'PIN (if encrypted)',
+    'sync.merge': 'Merge',
+    'day.weekdays': 'Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday',
+    'week.short': 'S,M,T,W,T,F,S',
+    'day.weekshort': 'Sun,Mon,Tue,Wed,Thu,Fri,Sat',
+    'day.modalTitle': '{mon} {d} · {week}',
+    'day.rangeTitle': '{mon1} {d1}–{mon2} {d2} ({n}d)',
+    'month.label': '{mon} {y}',
+    'toast.saved': 'Saved',
+    'toast.cleared': 'Cleared',
+    'toast.deleted': 'Deleted',
+    'toast.marked': 'Marked {n} days',
+    'toast.settingsSaved': 'Settings saved',
+    'toast.themeAuto': 'Following system',
+    'toast.themeDark': 'Dark mode',
+    'toast.themeLight': 'Light mode',
+    'toast.langChanged': 'Language changed',
+    'toast.exported': 'Backup exported (unencrypted)',
+    'toast.exportedEnc': 'Encrypted backup exported',
+    'toast.imported': 'Imported: {a} added, {u} updated',
+    'toast.clearedAll': 'Local records cleared',
+    'toast.cycleRange': 'Cycle must be 15–90 days',
+    'toast.periodRange': 'Period length must be 1–15 days',
+    'toast.pin4': 'PIN must be 4 digits',
+    'toast.needPin': 'Enter the PIN to import an encrypted backup',
+    'toast.needCode': 'Create a sync code first',
+    'toast.copied': 'Copied — paste it into a message',
+    'toast.selected': 'Selected — press Ctrl/⌘ + C to copy',
+    'toast.shareUnsupported': 'Sharing not supported here — copied instead',
+    'toast.shared': 'Share sheet opened',
+    'toast.shareCancelled': 'Share cancelled',
+    'toast.localNoLink': 'Opened as a local file, so there is no link to share. Use “Copy code” or “Share”.',
+    'toast.linkCopied': 'Link copied ({n} chars)',
+    'toast.linkCopiedPaste': 'Link copied. Tell them to paste it into their app, not tap it.',
+    'toast.copyFailed': 'Copy failed',
+    'sync.msgGenerating': 'Creating…',
+    'sync.msgGenerated': 'Created ({d} days, {n} chars){enc}',
+    'sync.msgEncrypted': ', encrypted',
+    'sync.msgPlain': ', not encrypted',
+    'sync.msgGenFailed': 'Failed: {e}',
+    'sync.msgDecoding': 'Decoding…',
+    'sync.msgMerged': 'Merged: {a} added, {u} updated, {k} kept local. Predictions recalculated.',
+    'sync.msgMergeFailed': 'Merge failed: {e}',
+    'sync.msgNeedPin': 'This code is encrypted — enter your partner’s 4-digit PIN',
+    'sync.msgNeedCode': 'Paste a sync code first',
+    'sync.msgFromUrl': 'Sync code found in the URL. Enter the PIN (if any) and press “Merge”.',
+    'confirm.clear1': 'This will delete {n} days of local records (cannot be undone). Consider exporting a backup first.\nContinue?',
+    'confirm.clear2': 'Final check: this cannot be undone. Continue?'
+  }
+};
+
+// 【功能】語言清單（下拉選單用）
+// 【原因】用戶要自己揀
+// 【修改指引】加語言要同時加落 I18N
+var LOCALES = [
+  { id: 'zh-TW', label: '繁體中文' },
+  { id: 'en', label: 'English' }
+];
+
+// 【功能】英文月份簡寫
+// 【原因】英文日期格式要用
+// 【修改指引】唔需要改
+var EN_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+/* 【功能】目前語言
+   【原因】所有 t() 都靠佢
+   【修改指引】唔需要改 */
+function currentLang() {
+  var l = (App.data && App.data.settings && App.data.settings.lang) || 'zh-TW';
+  return I18N[l] ? l : 'zh-TW';
+}
+
+/* 【功能】取字串並代入變數
+   【原因】避免每處自己砌句子
+   【修改指引】變數用 {name} 寫法
+   【回傳】已代入嘅字串（搵唔到 key 會回傳 key 本身，方便發現漏字） */
+function t(key, vars) {
+  var dict = I18N[currentLang()] || I18N['zh-TW'];
+  var s = dict[key];
+  if (s === undefined) s = (I18N['zh-TW'][key] !== undefined ? I18N['zh-TW'][key] : key);
+  if (!vars) return s;
+  return String(s).replace(/\{(\w+)\}/g, function (m, k) {
+    return vars[k] !== undefined ? vars[k] : m;
+  });
+}
+
+/* 【功能】星期名
+   【原因】每日彈窗要顯示
+   【修改指引】唔需要改 */
+function weekdayName(i) {
+  return t('day.weekdays').split(',')[i] || '';
+}
+
+/* 【功能】星期簡寫（週一 / Mon）
+   【原因】CEO 要求日期用 short form
+   【修改指引】唔需要改
+   */
+function weekdayShort(i) {
+  var arr = t('day.weekshort').split(',');
+  return arr[i] || weekdayName(i);
+}
+
+/* 【功能】短日期（10/29 或 Oct 29）
+   【原因】底部預測文字要精簡
+   【修改指引】唔需要改
+   */
+function shortDate(d) {
+  if (currentLang() === 'en') return EN_MONTHS[d.getMonth()] + ' ' + d.getDate();
+  return (d.getMonth() + 1) + '/' + d.getDate();
+}
+
+/* 【功能】月份名（用於標題同英文日期）
+   【原因】英文要 "Oct 2026"，中文要 "2026 年 10 月"
+   【修改指引】唔需要改
+   */
+function monthTitle(y, m) {
+  if (currentLang() === 'en') return EN_MONTHS[m] + ' ' + y;
+  return t('month.label', { y: y, m: m + 1 });
+}
+
+/* 【功能】日期文字（彈窗標題用）
+   【原因】唔同語言格式唔同
+   【修改指引】唔需要改 */
+function dateTitle(d) {
+  if (currentLang() === 'en') {
+    return t('day.modalTitle', { mon: EN_MONTHS[d.getMonth()], d: d.getDate(), week: weekdayShort(d.getDay()) });
+  }
+  return t('day.modalTitle', { m: d.getMonth() + 1, d: d.getDate(), week: weekdayShort(d.getDay()) });
+}
+
+/* 【功能】日期範圍文字（多日模式）
+   【原因】同上
+   【修改指引】唔需要改 */
+function rangeTitle(a, b, n) {
+  var da = parseYmd(a), db = parseYmd(b);
+  if (currentLang() === 'en') {
+    return t('day.rangeTitle', { mon1: EN_MONTHS[da.getMonth()], d1: da.getDate(), mon2: EN_MONTHS[db.getMonth()], d2: db.getDate(), n: n });
+  }
+  return t('day.rangeTitle', { m1: da.getMonth() + 1, d1: da.getDate(), m2: db.getMonth() + 1, d2: db.getDate(), n: n });
+}
+
+/* 【功能】把 data-i18n 套用到靜態元素
+   【原因】HTML 只需要寫 key，唔需要重複文字
+   【修改指引】HTML 屬性：data-i18n（textContent）、data-i18n-html（innerHTML）、data-i18n-ph（placeholder）
+   */
+function applyStaticText() {
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    el.textContent = t(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+    el.innerHTML = t(el.getAttribute('data-i18n-html'));
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function (el) {
+    el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph')));
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach(function (el) {
+    el.setAttribute('title', t(el.getAttribute('data-i18n-title')));
+  });
+  // 【功能】星期標題要跟語言（英文用 S M T W T F S）
+  // 【原因】原本寫死中文
+  // 【修改指引】唔需要改
+  var wh = document.getElementById('weekhead');
+  if (wh) {
+    var names = t('week.short').split(',');
+    wh.innerHTML = names.map(function (n, i) {
+      var cls = (i === 0 || i === 6) ? ' class="we"' : '';
+      return '<div' + cls + '>' + esc(n) + '</div>';
+    }).join('');
+  }
+
+  document.documentElement.setAttribute('lang', t('html.lang'));
+  document.title = t('app.title');
 }
 
 
@@ -700,6 +1089,69 @@ function predictPeriodDays(logs, settings, opts) {
     }
   }
   return { map: out, params: params };
+}
+
+
+/* 【功能】估算易孕期（藍框）、相對低機會日（綠框）同排卵日（圓點）
+   【原因】CEO 要求用科學方法由經期紀錄動態推算
+   【原理】
+     - 受孕只可能發生喺「排卵日前 5 日至排卵日」呢 6 日（NEJM 1995 Wilcox 研究）
+     - 排卵日 ≈ 下一次預計經期開始日 − 14 日（黃體期相對穩定）
+     - 綠色只框「經期前後一段」：經期結束後 3 日、下次經期前 3 日
+   【限制】日曆法唔可以當避孕（典型使用失敗率 14–27%，Guttmacher）
+   【修改指引】想調窗口長度改 FERTILE_BEFORE / SAFE_AFTER_PERIOD / SAFE_BEFORE_PERIOD
+   */
+var FERTILE_BEFORE = 5;        // 排卵日前幾多日開始易孕
+var SAFE_AFTER_PERIOD = 3;     // 經期結束後幾多日算「相對低機會」
+var SAFE_BEFORE_PERIOD = 3;    // 下次經期前幾多日算「相對低機會」
+var LUTEAL_DAYS = 14;          // 排卵到下次經期嘅日數
+
+function computeFertility(logs, settings, opts) {
+  var months = (opts && opts.months) || 12;
+  var p = computePredictionParams(logs, settings);
+  var out = { ok: false, fertile: {}, safe: {}, ovulation: {}, params: p };
+
+  // 【原因】紀錄不足 2 個完整週期就唔亂估，免得誤導
+  if (!p.events.length || p.source !== 'history') return out;
+
+  out.ok = true;
+  var today = todayDate();
+  var limit = addDays(today, Math.round(months * 30.4));
+  // 【功能】由「上一個月一號」開始標
+  // 【原因】只標今日之後嘅話，今個月會空白一片，睇唔到剛過去嘅週期
+  // 【修改指引】唔需要改
+  var floor = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+  var last = p.events[p.events.length - 1];
+  var lastStart = parseYmd(last.start);
+
+  function mark(map, d) {
+    if (d < floor || d > limit) return;
+    map[ymd(d)] = true;
+  }
+
+  for (var n = 0; n < 24; n++) {
+    var start = addDays(lastStart, p.cycleGap * n);
+    if (start > limit) break;
+    var end = addDays(start, p.periodLength - 1);
+    var nextStart = addDays(start, p.cycleGap);
+    var ovu = addDays(nextStart, -LUTEAL_DAYS);
+
+    // 藍：易孕期（排卵前 5 日至排卵日）
+    for (var i = FERTILE_BEFORE; i >= 0; i--) mark(out.fertile, addDays(ovu, -i));
+    mark(out.ovulation, ovu);
+
+    // 綠：經期結束後一段
+    for (var a = 1; a <= SAFE_AFTER_PERIOD; a++) {
+      var d1 = addDays(end, a);
+      if (!out.fertile[ymd(d1)]) mark(out.safe, d1);
+    }
+    // 綠：下次經期前一段
+    for (var b = SAFE_BEFORE_PERIOD; b >= 1; b--) {
+      var d2 = addDays(nextStart, -b);
+      if (!out.fertile[ymd(d2)]) mark(out.safe, d2);
+    }
+  }
+  return out;
 }
 
 
@@ -919,10 +1371,10 @@ async function importBackupText(text) {
 
 /* ===== js/30-ui.js ===== */
 /* ==========================================================================
-   30-ui.js — 日曆、每日彈窗、多日選取、設定、同步、主題
+   30-ui.js — 日曆、每日彈窗、多日選取、設定、同步、主題、語言
    【功能】所有畫面同互動（對應 frontend/index.template.html 嘅元素 id）
-   【原因】UI 集中一個檔，方便日後改版
-   【修改指引】加新標記／新按鈕，改 renderCalendar 同相關綁定
+   【原因】UI 集中一個檔；所有文字經 05-i18n.js 嘅 t() 取，唔會寫死
+   【修改指引】加新畫面／新按鈕，記得同時喺 05-i18n.js 三個語言加 key
    ========================================================================== */
 
 /* 【功能】短寫元素查詢
@@ -930,18 +1382,13 @@ async function importBackupText(text) {
    【修改指引】唔需要改 */
 function $(id) { return document.getElementById(id); }
 
-// 【功能】星期名
-// 【原因】彈窗標題要顯示星期幾
-// 【修改指引】唔需要改
-var WEEK_NAMES = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-
 /* 【功能】多日選取狀態
-   【原因】CEO 要求可以撳住掃過連續幾日一次過標記（補記經期最快）
+   【原因】可以撳住掃過連續幾日一次過標記
    【修改指引】唔需要改 */
 var Sel = { active: false, start: null, end: null };
 
 /* 【功能】重畫日曆同底部預測
-   【原因】每次記錄／刪除／同步／改設定之後都要即時反映
+   【原因】每次記錄／刪除／同步／改設定／改語言之後都要即時反映
    【修改指引】唔需要改 */
 function renderAll() {
   renderCalendar();
@@ -953,11 +1400,20 @@ function renderAll() {
    【修改指引】唔需要改 */
 function renderCalendar() {
   var y = App.viewYear, m = App.viewMonth;
-  $('monthLabel').textContent = y + ' 年 ' + (m + 1) + ' 月';
+  $('monthLabel').textContent = monthTitle(y, m);
 
   var pred = predictPeriodDays(App.data.logs, App.data.settings, { months: 14 });
   App.predMap = pred.map;
   App.params = pred.params;
+
+  // 【功能】易孕期／低機會／排卵日（可以喺設定關閉）
+  // 【原因】用科學方法估算，藍框／綠框＋紫點顯示
+  // 【修改指引】唔需要改
+  var showFert = !(App.data.settings && App.data.settings.showFertility === false);
+  var fert = showFert
+    ? computeFertility(App.data.logs, App.data.settings, { months: 14 })
+    : { ok: false, fertile: {}, safe: {}, ovulation: {} };
+  App.fert = fert;
 
   var todayKey = ymd(todayDate());
   var first = new Date(y, m, 1);
@@ -973,23 +1429,29 @@ function renderCalendar() {
     var drop;
 
     if (log && log.isPeriod) {
-      drop = '<span class="drop" title="已記錄經期">🩸</span>';
+      drop = '<span class="drop" title="' + esc(t('legend.period')) + '">🩸</span>';
     } else if (pred.map[key]) {
-      drop = '<span class="drop pred" title="預測經期">🩸</span>';
+      drop = '<span class="drop pred" title="' + esc(t('legend.predicted')) + '">🩸</span>';
     } else {
       drop = '<span class="drop" style="visibility:hidden">🩸</span>';
     }
 
     var badges = '';
-    if (log && log.safeSex) badges += '<span title="安全性行為">🛡️</span>';
-    if (log && log.unsafeSex) badges += '<span title="不安全性行為">⚠️</span>';
-    if (log && log.remark && String(log.remark).trim()) badges += '<span title="有備註">💬</span>';
+    if (log && log.safeSex) badges += '<span title="' + esc(t('mark.safeSex')) + '">🛡️</span>';
+    if (log && log.unsafeSex) badges += '<span title="' + esc(t('mark.unsafeSex')) + '">⚠️</span>';
+    if (log && log.remark && String(log.remark).trim()) badges += '<span title="' + esc(t('label.note')) + '">💬</span>';
 
     var cls = 'cell';
     if (key === todayKey) cls += ' today';
     if (log && !isEmptyLog(log)) cls += ' haslog';
+    if (fert.ok && fert.fertile[key]) cls += ' fertile';
+    else if (fert.ok && fert.safe[key]) cls += ' safe';
+
+    var ovuDot = (fert.ok && fert.ovulation[key])
+      ? '<i class="ovu" title="' + esc(t('legend.ovulation')) + '"></i>' : '';
 
     html += '<button class="' + cls + '" type="button" data-date="' + key + '">' +
+      ovuDot +
       '<span class="dnum">' + d + '</span>' + drop +
       '<span class="badges">' + badges + '</span></button>';
   }
@@ -1023,7 +1485,9 @@ function renderFooter() {
   var p = App.params || computePredictionParams(App.data.logs, App.data.settings);
 
   if (!p.events.length) {
-    el.innerHTML = '💡 撳月曆上嘅日期，勾「月經」就開始記錄；有紀錄之後會自動預測。';
+    el.innerHTML = t('footer.noRecords');
+    var n0 = $('fertilityNote');
+    if (n0) n0.hidden = true;
     return;
   }
 
@@ -1038,18 +1502,25 @@ function renderFooter() {
   var diff = dayDiff(today, next);
 
   var src = p.source === 'history'
-    ? '按過往 ' + p.cycles + ' 個週期加權平均（平均 ' + p.cycleGap + ' 日、經期 ' + p.periodLength + ' 日）'
-    : '紀錄未夠 2 個完整週期，暫用設定值（' + p.cycleGap + ' 日）';
+    ? t('footer.srcHistory', { n: p.cycles, g: p.cycleGap, p: p.periodLength })
+    : t('footer.srcDefault', { g: p.cycleGap });
 
-  var head;
-  if (diff === 0) head = '預計<b>今日</b>係經期開始日 🩸';
-  else head = '下次經期約 <b>' + diff + ' 日後</b>（' + ymd(next).replace(/-/g, '/') + '）';
+  var head = diff === 0
+    ? t('footer.today')
+    : t('footer.nextIn', { d: diff, date: shortDate(next) });
 
   el.innerHTML = head + '<span class="sub">' + esc(src) + '</span>';
+
+  // 【功能】有推算結果才顯示免責聲明
+  // 【原因】避免用戶誤當成避孕工具
+  // 【修改指引】唔需要改
+  var showFert = !(App.data.settings && App.data.settings.showFertility === false);
+  var note = $('fertilityNote');
+  if (note) note.hidden = !(showFert && App.fert && App.fert.ok);
 }
 
-/* 【功能】開單日記錄彈窗
-   【原因】CEO 指定互動：撳任何日期就開
+/* 【功能】開每日記錄彈窗（支援多日）
+   【原因】撳日期就開；撳住掃過幾日就一次過標記
    【修改指引】唔需要改 */
 function openDayModal(dateKey, rangeEnd) {
   App.selected = dateKey;
@@ -1060,17 +1531,15 @@ function openDayModal(dateKey, rangeEnd) {
   var b = isRange && rangeEnd < dateKey ? dateKey : rangeEnd;
   var n = isRange ? (dayDiff(a, b) + 1) : 1;
 
-  var d = parseYmd(a);
   if (isRange) {
-    var d2 = parseYmd(b);
-    $('dayTitle').textContent = (d.getMonth() + 1) + '月' + d.getDate() + '日 – ' + (d2.getMonth() + 1) + '月' + d2.getDate() + '日（' + n + ' 日）';
-    $('modalSub').textContent = '多日模式：只會套用「月經」同「流量」到呢 ' + n + ' 日';
+    $('dayTitle').textContent = rangeTitle(a, b, n);
+    $('modalSub').textContent = t('modal.subRange', { n: n });
   } else {
-    $('dayTitle').textContent = d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日 · ' + WEEK_NAMES[d.getDay()];
-    $('modalSub').textContent = '勾選或寫備註，撳「儲存」';
+    $('dayTitle').textContent = dateTitle(parseYmd(a));
+    $('modalSub').textContent = t('modal.sub');
   }
 
-  // 多日模式隱藏安全／不安全／備註（每日本身可能唔同，唔應該一次過蓋）
+  // 多日模式隱藏安全／不安全／備註（每日可能唔同，唔應該一次過蓋）
   $('rowSafe').hidden = isRange;
   $('rowUnsafe').hidden = isRange;
   $('remark').hidden = isRange;
@@ -1100,8 +1569,8 @@ function closeDayModal() {
   App.rangeEnd = null;
 }
 
-/* 【功能】同步勾選狀態、流量顯示、安全/不安全互斥
-   【原因】CEO 要求：勾「月經」才出現流量；安全同不安全唔應該同時成立
+/* 【功能】同步勾選狀態、流量顯示
+   【原因】勾「月經」才出現流量；視覺上要反映已勾
    【修改指引】唔需要改 */
 function syncChecks() {
   $('flowRow').classList.toggle('show', $('cbPeriod').checked);
@@ -1111,7 +1580,7 @@ function syncChecks() {
 }
 
 /* 【功能】安全／不安全互斥
-   【原因】兩個同時勾係矛盾資料，會令日曆顯示兩個標記
+   【原因】兩個同時勾係矛盾資料
    【修改指引】唔需要改 */
 function enforceSexclusive(which) {
   if (which === 'safe' && $('cbSafe').checked) $('cbUnsafe').checked = false;
@@ -1144,19 +1613,13 @@ function saveDayModal() {
       var old = getLog(k) || {};
       if (isPeriod) {
         setLog(k, {
-          isPeriod: true,
-          flow: flow,
-          safeSex: !!old.safeSex,
-          unsafeSex: !!old.unsafeSex,
-          remark: old.remark || ''
+          isPeriod: true, flow: flow,
+          safeSex: !!old.safeSex, unsafeSex: !!old.unsafeSex, remark: old.remark || ''
         });
       } else if (old.isPeriod) {
         var keep = {
-          isPeriod: false,
-          flow: null,
-          safeSex: !!old.safeSex,
-          unsafeSex: !!old.unsafeSex,
-          remark: old.remark || ''
+          isPeriod: false, flow: null,
+          safeSex: !!old.safeSex, unsafeSex: !!old.unsafeSex, remark: old.remark || ''
         };
         if (isEmptyLog(keep)) setLog(k, null); else setLog(k, keep);
       }
@@ -1165,7 +1628,7 @@ function saveDayModal() {
     }
     closeDayModal();
     renderAll();
-    toast('已標記 ' + count + ' 日');
+    toast(t('toast.marked', { n: count }));
     return;
   }
 
@@ -1183,11 +1646,11 @@ function saveDayModal() {
 
   closeDayModal();
   renderAll();
-  toast(empty ? '已清除' : '已儲存');
+  toast(empty ? t('toast.cleared') : t('toast.saved'));
 }
 
-/* 【功能】刪除紀錄（多日模式一樣）
-   【原因】CEO 要求 Clear/Delete
+/* 【功能】刪除紀錄（多日一樣）
+   【原因】需要可以整段刪走
    【修改指引】唔需要改 */
 function clearDayModal() {
   var key = App.selected;
@@ -1196,23 +1659,19 @@ function clearDayModal() {
   if (App.rangeEnd && App.rangeEnd !== key) {
     var a = App.rangeEnd < key ? App.rangeEnd : key;
     var b = App.rangeEnd < key ? key : App.rangeEnd;
-    var cursor = parseYmd(a);
-    var end = parseYmd(b);
-    while (cursor <= end) {
-      setLog(ymd(cursor), null);
-      cursor = addDays(cursor, 1);
-    }
+    var cursor = parseYmd(a), end = parseYmd(b);
+    while (cursor <= end) { setLog(ymd(cursor), null); cursor = addDays(cursor, 1); }
   } else {
     setLog(key, null);
   }
 
   closeDayModal();
   renderAll();
-  toast('已刪除');
+  toast(t('toast.deleted'));
 }
 
 /* 【功能】開／關設定抽屜
-   【原因】週期、主題、備份入口
+   【原因】週期、主題、語言、備份入口
    【修改指引】唔需要改 */
 function toggleDrawer() {
   var d = $('drawer');
@@ -1220,10 +1679,12 @@ function toggleDrawer() {
   if (d.classList.contains('open')) {
     $('setCycle').value = App.data.settings.cycleGap;
     $('setPeriod').value = App.data.settings.periodLength;
+    $('setFertility').checked = !(App.data.settings.showFertility === false);
+    $('langSel').value = currentLang();
     var p = computePredictionParams(App.data.logs, App.data.settings);
     $('setInfo').textContent = p.source === 'history'
-      ? '目前用 ' + p.cycles + ' 個歷史週期（平均 ' + p.cycleGap + ' 日）。下面數值只在紀錄不足時使用。'
-      : '紀錄未夠 2 個完整週期，會用下面數值預測。';
+      ? t('drawer.hintHistory', { n: p.cycles, g: p.cycleGap })
+      : t('drawer.hintDefault');
   }
 }
 
@@ -1233,36 +1694,60 @@ function toggleDrawer() {
 function saveSettings() {
   var cg = parseInt($('setCycle').value, 10);
   var pl = parseInt($('setPeriod').value, 10);
-  if (!(cg >= 15 && cg <= 90)) { toast('週期請輸入 15–90 日'); return; }
-  if (!(pl >= 1 && pl <= 15)) { toast('經期長度請輸入 1–15 日'); return; }
+  if (!(cg >= 15 && cg <= 90)) { toast(t('toast.cycleRange')); return; }
+  if (!(pl >= 1 && pl <= 15)) { toast(t('toast.periodRange')); return; }
   App.data.settings.cycleGap = cg;
   App.data.settings.periodLength = pl;
+  App.data.settings.showFertility = $('setFertility').checked;
   saveData();
   renderAll();
-  toast('設定已儲存');
+  toast(t('toast.settingsSaved'));
+}
+
+/* 【功能】切換語言
+   【原因】CEO 要求可以揀英文或繁體書面語
+   【修改指引】唔需要改
+   */
+function changeLang(lang) {
+  if (!I18N[lang]) return;
+  App.data.settings.lang = lang;
+  saveData();
+  applyStaticText();
+  applyTheme();
+  renderAll();
+  toast(t('toast.langChanged'));
 }
 
 /* 【功能】套用主題
    【原因】跟系統或手動指定
    【修改指引】唔需要改 */
 function applyTheme() {
-  var t = (App.data.settings && App.data.settings.theme) || 'auto';
-  if (t === 'auto') document.documentElement.removeAttribute('data-theme');
-  else document.documentElement.setAttribute('data-theme', t);
-  var label = t === 'dark' ? '主題：深色' : (t === 'light' ? '主題：淺色' : '主題：跟系統');
+  var th = (App.data.settings && App.data.settings.theme) || 'auto';
+  if (th === 'auto') document.documentElement.removeAttribute('data-theme');
+  else document.documentElement.setAttribute('data-theme', th);
+
+  var base = t('drawer.theme').split('：')[0].split(':')[0];
+  var label = th === 'dark' ? base + (currentLang() === 'en' ? ': dark' : '：深色')
+    : (th === 'light' ? base + (currentLang() === 'en' ? ': light' : '：淺色')
+      : base + (currentLang() === 'en' ? ': system' : '：跟系統'));
+
   if ($('themeBtn')) $('themeBtn').textContent = label;
+  if ($('themeIcon')) {
+    $('themeIcon').textContent = th === 'dark' ? '🌙' : (th === 'light' ? '☀️' : '🌓');
+    $('themeIcon').title = t('header.theme');
+  }
 }
 
 /* 【功能】切換主題（跟系統 → 深色 → 淺色）
-   【原因】一撳即轉，唔需要入選單
+   【原因】一撳即轉
    【修改指引】唔需要改 */
 function cycleTheme() {
-  var t = (App.data.settings && App.data.settings.theme) || 'auto';
-  var next = t === 'auto' ? 'dark' : (t === 'dark' ? 'light' : 'auto');
+  var th = (App.data.settings && App.data.settings.theme) || 'auto';
+  var next = th === 'auto' ? 'dark' : (th === 'dark' ? 'light' : 'auto');
   App.data.settings.theme = next;
   saveData();
   applyTheme();
-  toast(next === 'auto' ? '跟隨系統' : (next === 'dark' ? '已轉深色' : '已轉淺色'));
+  toast(next === 'auto' ? t('toast.themeAuto') : (next === 'dark' ? t('toast.themeDark') : t('toast.themeLight')));
 }
 
 /* 【功能】產生同步碼
@@ -1270,22 +1755,22 @@ function cycleTheme() {
    【修改指引】唔需要改 */
 async function doGenerateSync() {
   var pin = $('genPin').value.trim();
-  if (pin && !/^\d{4}$/.test(pin)) { setSyncMsg('PIN 要 4 位數字', true); return; }
-  setSyncMsg('產生中…', false);
+  if (pin && !/^\d{4}$/.test(pin)) { setSyncMsg(t('toast.pin4'), true); return; }
+  setSyncMsg(t('sync.msgGenerating'), false);
   try {
     var code = await encodeSync(pin || null);
     $('syncOut').value = code;
     $('syncOutWrap').hidden = false;
     var days = Object.keys(App.data.logs).length;
-    setSyncMsg('已產生（' + days + ' 日紀錄、' + code.length + ' 字元）' + (pin ? '，已加密' : '，未加密'), false);
-    // 【功能】本機開嘅時候講明冇連結可用
-    // 【原因】file:// 嘅「連結」對另一個人冇意義
-    // 【修改指引】唔需要改
+    setSyncMsg(t('sync.msgGenerated', {
+      d: days, n: code.length,
+      enc: pin ? t('sync.msgEncrypted') : t('sync.msgPlain')
+    }), false);
     var isFile = location.protocol === 'file:';
     $('linkHint').hidden = isFile;
     $('copyLink').disabled = isFile;
   } catch (e) {
-    setSyncMsg('產生失敗：' + e.message, true);
+    setSyncMsg(t('sync.msgGenFailed', { e: e.message }), true);
   }
 }
 
@@ -1294,80 +1779,75 @@ async function doGenerateSync() {
    【修改指引】唔需要改 */
 async function copySync() {
   var v = $('syncOut').value;
-  if (!v) { setSyncMsg('請先產生同步碼', true); return; }
+  if (!v) { setSyncMsg(t('toast.needCode'), true); return; }
   try {
     await navigator.clipboard.writeText(v);
-    setSyncMsg('已複製，貼去訊息傳畀對方就得', false);
+    setSyncMsg(t('toast.copied'), false);
   } catch (e) {
     $('syncOut').select();
-    setSyncMsg('已選取，請按 Ctrl／⌘ + C 複製', false);
+    setSyncMsg(t('toast.selected'), false);
   }
 }
 
 /* 【功能】用手機／電腦內建分享傳同步碼
-   【原因】CEO 問「手機同電腦點簡單同步」——分享（AirDrop／WhatsApp）比複製貼上快好多
-   【修改指引】唔支援分享嘅瀏覽器會自動退回複製
-   【注意】分享內容含私密紀錄，建議先設 PIN 加密
+   【原因】AirDrop／WhatsApp 比複製貼上快
+   【修改指引】唔支援分享會自動退回複製
    */
 async function shareSync() {
   var v = $('syncOut').value;
-  if (!v) { setSyncMsg('請先產生同步碼', true); return; }
+  if (!v) { setSyncMsg(t('toast.needCode'), true); return; }
   if (navigator.share) {
     try {
-      await navigator.share({ title: '經期日誌 · 同步碼', text: v });
-      setSyncMsg('已開啟分享', false);
+      await navigator.share({ title: t('app.title'), text: v });
+      setSyncMsg(t('toast.shared'), false);
       return;
     } catch (e) {
-      if (e && e.name === 'AbortError') { setSyncMsg('已取消分享', false); return; }
+      if (e && e.name === 'AbortError') { setSyncMsg(t('toast.shareCancelled'), false); return; }
     }
   }
   await copySync();
-  setSyncMsg('呢個瀏覽器唔支援分享，已幫你複製', false);
+  setSyncMsg(t('toast.shareUnsupported'), false);
 }
 
 /* 【功能】複製帶同步碼嘅連結
-   【原因】一個連結就傳得，唔需要對方手動貼碼
-   【注意】只有用網址開（http/https）才有意義；本機 file:// 開出嚟嘅連結冇用
+   【原因】一個連結就傳得
+   【注意】本機 file:// 開出嚟嘅連結對別人冇意義，會禁用
    【修改指引】唔需要改
    */
 async function copySyncLink() {
   var v = $('syncOut').value;
-  if (!v) { setSyncMsg('請先產生同步碼', true); return; }
-  if (location.protocol === 'file:') {
-    setSyncMsg('你而家用本機檔案開，冇網址可以分享；請用「複製碼」或「分享」', true);
-    return;
-  }
-  var base = location.origin + location.pathname;
-  var url = base + '#sync=' + encodeURIComponent(v);
+  if (!v) { setSyncMsg(t('toast.needCode'), true); return; }
+  if (location.protocol === 'file:') { setSyncMsg(t('toast.localNoLink'), true); return; }
+  var url = location.origin + location.pathname + '#sync=' + encodeURIComponent(v);
   try {
     await navigator.clipboard.writeText(url);
-    setSyncMsg('已複製連結（' + url.length + ' 字元），傳畀對方一撳就開', false);
+    setSyncMsg(t('toast.linkCopiedPaste', { n: url.length }), false);
   } catch (e) {
-    setSyncMsg('複製失敗，請長按選取：' + url.slice(0, 40) + '…', true);
+    setSyncMsg(t('toast.copyFailed'), true);
   }
 }
 
 /* 【功能】合併對方資料
-   【原因】CEO 要求：解碼 → 合併（唔覆蓋衝突日期）→ 重算 → 刷新
+   【原因】解碼 → 合併（唔覆蓋衝突日期）→ 重算 → 刷新
    【修改指引】唔需要改 */
 async function doMergeSync() {
   var code = $('mergeIn').value.trim();
   var pin = $('mergePin').value.trim();
-  if (!code) { setSyncMsg('請貼上同步碼', true); return; }
+  if (!code) { setSyncMsg(t('sync.msgNeedCode'), true); return; }
   var info = inspectSync(code);
   if (!info.ok) { setSyncMsg(info.error, true); return; }
-  if (info.encrypted && !pin) { setSyncMsg('呢個同步碼有加密，請輸入對方嘅 4 位 PIN', true); return; }
+  if (info.encrypted && !pin) { setSyncMsg(t('sync.msgNeedPin'), true); return; }
 
-  setSyncMsg('解碼中…', false);
+  setSyncMsg(t('sync.msgDecoding'), false);
   try {
     var incoming = await decodeSync(code, pin || null);
     var r = mergeLogs(incoming);
     saveData();
     renderAll();
-    setSyncMsg('已合併：新增 ' + r.added + ' 日、更新 ' + r.updated + ' 日、保留本地 ' + r.kept + ' 日。預測已重算。', false);
+    setSyncMsg(t('sync.msgMerged', { a: r.added, u: r.updated, k: r.kept }), false);
     $('mergeIn').value = '';
   } catch (e) {
-    setSyncMsg('合併失敗：' + e.message, true);
+    setSyncMsg(t('sync.msgMergeFailed', { e: e.message }), true);
   }
 }
 
@@ -1416,7 +1896,7 @@ function jumpToday() {
 }
 
 /* 【功能】由網址讀同步碼
-   【原因】規格有 #sync=...；放上 GitHub Pages 之後可以直接用連結傳
+   【原因】規格有 #sync=...；放上網之後可以用連結傳
    【修改指引】唔需要改 */
 function consumeUrlSync() {
   var h = location.hash || '';
@@ -1426,7 +1906,7 @@ function consumeUrlSync() {
     $('mergeIn').value = code;
     $('syncModal').hidden = false;
     switchSyncTab('merge');
-    setSyncMsg('已從網址讀到同步碼，如有 PIN 請輸入，再按「合併」', false);
+    setSyncMsg(t('sync.msgFromUrl'), false);
     history.replaceState(null, '', location.pathname);
   } catch (e) { /* 忽略壞網址 */ }
 }
@@ -1444,22 +1924,22 @@ function switchSyncTab(which) {
 }
 
 /* 【功能】匯出備份（可加密）
-   【原因】CEO 要備份；加密版可以安全擺喺雲端／傳送
+   【原因】備份；加密版可安全擺喺雲端／傳送
    【修改指引】唔需要改 */
 async function doExportBackup() {
   var pin = $('backupPin').value.trim();
-  if (pin && !/^\d{4}$/.test(pin)) { toast('備份 PIN 要 4 位數字'); return; }
+  if (pin && !/^\d{4}$/.test(pin)) { toast(t('toast.pin4')); return; }
   try {
     if (pin) {
       var code = await encodeSync(pin);
       downloadBlob(new Blob([code], { type: 'text/plain' }), 'period-backup-' + ymd(todayDate()) + '.ptbackup');
-      toast('已匯出加密備份');
+      toast(t('toast.exportedEnc'));
     } else {
       exportBackup();
-      toast('已匯出備份（未加密）');
+      toast(t('toast.exported'));
     }
   } catch (e) {
-    toast('匯出失敗：' + e.message);
+    toast(t('toast.exported') + ' ✕');
   }
 }
 
@@ -1469,13 +1949,12 @@ async function doExportBackup() {
    */
 async function onImportFile(files) {
   if (!files || !files.length) return;
-  var f = files[0];
   try {
-    var text = await f.text();
+    var text = await files[0].text();
     var r;
     if (inspectSync(text).ok) {
       var pin = $('backupPin').value.trim();
-      if (!pin) { toast('加密備份要輸入 PIN 先匯入'); return; }
+      if (!pin) { toast(t('toast.needPin')); return; }
       var data = await decodeSync(text, pin);
       r = mergeLogs(data);
       if (data.settings && data.settings.cycleGap) App.data.settings.cycleGap = data.settings.cycleGap;
@@ -1485,9 +1964,9 @@ async function onImportFile(files) {
       r = await importBackupText(text);
     }
     renderAll();
-    toast('已匯入：新增 ' + r.added + '、更新 ' + r.updated + ' 日');
+    toast(t('toast.imported', { a: r.added, u: r.updated }));
   } catch (e) {
-    toast('匯入失敗：' + e.message);
+    toast(t('toast.importFailed', { e: e.message }) || ('✕ ' + e.message));
   }
   $('importFile').value = '';
 }
@@ -1508,13 +1987,13 @@ function downloadBlob(blob, filename) {
 
 /* 【功能】清除同呢個程式相關嘅瀏覽器紀錄
    【原因】CEO 要求可以一鍵清走本機資料
-   【注意】破壞性操作：必須二次確認，並先提示匯出
-   【修改指引】如果有新增其他 localStorage key，要一併清
+   【注意】破壞性操作：必須二次確認
+   【修改指引】如有新增其他 localStorage key，要一併清
    */
 function clearLocalRecords() {
   var n = Object.keys(App.data.logs).length;
-  if (!window.confirm('會清除本機 ' + n + ' 日紀錄（無法復原）。建議先「匯出備份」。\n確定清除？')) return;
-  if (!window.confirm('最後確認：清除後冇得還原，繼續？')) return;
+  if (!window.confirm(t('confirm.clear1', { n: n }))) return;
+  if (!window.confirm(t('confirm.clear2'))) return;
 
   try {
     window.localStorage.removeItem('period_tracker_data');
@@ -1522,14 +2001,31 @@ function clearLocalRecords() {
   } catch (e) { /* 忽略 */ }
 
   App.data = {
-    settings: { cycleGap: DEFAULT_SETTINGS.cycleGap, periodLength: DEFAULT_SETTINGS.periodLength, theme: 'auto' },
+    settings: {
+      cycleGap: DEFAULT_SETTINGS.cycleGap,
+      periodLength: DEFAULT_SETTINGS.periodLength,
+      theme: 'auto',
+      lang: currentLang()
+    },
     logs: {}
   };
   saveData();
   applyTheme();
   renderAll();
   $('drawer').classList.remove('open');
-  toast('已清除本機紀錄');
+  toast(t('toast.clearedAll'));
+}
+
+/* 【功能】填語言選單
+   【原因】語言清單集中喺 05-i18n.js
+   【修改指引】唔需要改 */
+function buildLangSelect() {
+  var sel = $('langSel');
+  if (!sel) return;
+  sel.innerHTML = LOCALES.map(function (l) {
+    return '<option value="' + l.id + '">' + esc(l.label) + '</option>';
+  }).join('');
+  sel.value = currentLang();
 }
 
 /* 【功能】綁定所有事件
@@ -1540,14 +2036,17 @@ function initApp() {
   var now = new Date();
   App.viewYear = now.getFullYear();
   App.viewMonth = now.getMonth();
+
+  buildLangSelect();
+  applyStaticText();
   applyTheme();
 
   $('prevBtn').addEventListener('click', function () { moveMonth(-1); });
   $('nextBtn').addEventListener('click', function () { moveMonth(1); });
   $('todayBtn').addEventListener('click', jumpToday);
 
-  // 【功能】日曆互動：撳一下就開單日；撳住掃過幾日就開多日模式
-  // 【原因】CEO 要求可以連續幾日一次過標記
+  // 【功能】日曆互動：撳一下開單日；撳住掃過幾日開多日模式
+  // 【原因】連續補記經期最快
   // 【修改指引】唔需要改
   var grid = $('grid');
   grid.addEventListener('pointerdown', function (ev) {
@@ -1599,21 +2098,24 @@ function initApp() {
   $('tabMerge').addEventListener('click', function () { switchSyncTab('merge'); });
   $('genSync').addEventListener('click', doGenerateSync);
   $('copySync').addEventListener('click', copySync);
-  $('shareSync').addEventListener('click', shareSync);
   $('copyLink').addEventListener('click', copySyncLink);
+  $('shareSync').addEventListener('click', shareSync);
+  $('mergeSync').addEventListener('click', doMergeSync);
+
   // 【功能】由同步視窗直接跳去備份入口
-  // 【原因】CEO 選定「貼碼」同「備份檔」兩種方法，要容易切換
+  // 【原因】兩種傳法要容易切換
   // 【修改指引】唔需要改
   $('openBackup').addEventListener('click', function () {
     $('syncModal').hidden = true;
     if (!$('drawer').classList.contains('open')) toggleDrawer();
     $('exportBtn').scrollIntoView({ block: 'center' });
   });
-  $('mergeSync').addEventListener('click', doMergeSync);
 
   $('settingsBtn').addEventListener('click', toggleDrawer);
   $('saveSettings').addEventListener('click', saveSettings);
   $('themeBtn').addEventListener('click', cycleTheme);
+  $('themeIcon').addEventListener('click', cycleTheme);
+  $('langSel').addEventListener('change', function (ev) { changeLang(ev.target.value); });
   $('exportBtn').addEventListener('click', doExportBackup);
   $('importBtn').addEventListener('click', function () { $('importFile').click(); });
   $('importFile').addEventListener('change', function (ev) { onImportFile(ev.target.files); });
@@ -1628,15 +2130,12 @@ function initApp() {
   registerServiceWorker();
 }
 
-/* 【功能】註冊 service worker（只有放上網時才有效）
-   【原因】CEO 要 PWA：加到主畫面 + 第一次開完之後離線都用得
-   【修改指引】本機 file:// 開唔到 service worker，會靜靜跳過
+/* 【功能】註冊 service worker（只有 https 或 localhost 才有效）
+   【原因】PWA：加到主畫面 + 開一次之後離線都用得
+   【修改指引】本機 file:// 會靜靜跳過
    */
 function registerServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
-  // 【功能】只喺安全環境註冊（https 或 localhost）
-  // 【原因】file:// 唔支援 service worker；localhost 要准，方便本地測試
-  // 【修改指引】唔需要改
   var secure = location.protocol === 'https:' ||
     location.hostname === 'localhost' || location.hostname === '127.0.0.1';
   if (!secure) return;
