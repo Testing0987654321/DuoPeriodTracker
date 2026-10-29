@@ -1,0 +1,25 @@
+{
+  "name": "Duo — Period Tracker",
+  "short_name": "Duo",
+  "description": "Duo：離線經期與週期追蹤，資料只存喺你部機",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FAF7F5",
+  "theme_color": "#F43F5E",
+  "lang": "zh-HK",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
